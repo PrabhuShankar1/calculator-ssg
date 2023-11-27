@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        
+        body {
+            background-image: url('https://c8.alamy.com/comp/EMD5HM/calculator-a-background-EMD5HM.jpg');
+             background-repeat: no-repeat;
+             background-attachment: fixed;
+             background-size: cover;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            border: 1px solid #000000;
+            border-radius: 5px;
+            overflow: hidden;
+            width: 300px;
+        }
+
+        .display {
+            font-size: 2em;
+            padding: 10px;
+            text-align: right;
+            border-bottom: 1px solid #000000;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        button {
+            font-size: 1.5em;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2600ff;
+        }
+
+        .operator {
+            background-color: #ff8c00;
+            color: rgb(255, 0, 0);
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 5px;
+            padding: 10px;
+        }
+
+        input {
+            grid-column: span 4;                                        
+            font-size: 1.5em;
+            padding: 10px;
+            width: calc(100% - 20px); /* Adjusting width to accommodate padding */
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" name="expression" id="expression" class="display" readonly>
+        <form action="/calculate" method="post">
+            <button type="button" onclick="appendToExpression('7')">7</button>
+            <button type="button" onclick="appendToExpression('8')">8</button>
+            <button type="button" onclick="appendToExpression('9')">9</button>
+            <button type="button" onclick="appendToExpression('/')">/</button>
+            <button type="button" onclick="appendToExpression('4')">4</button>
+            <button type="button" onclick="appendToExpression('5')">5</button>
+            <button type="button" onclick="appendToExpression('6')">6</button>
+            <button type="button" onclick="appendToExpression('*')">*</button>
+            <button type="button" onclick="appendToExpression('1')">1</button>
+            <button type="button" onclick="appendToExpression('2')">2</button>
+            <button type="button" onclick="appendToExpression('3')">3</button>
+            <button type="button" onclick="appendToExpression('-')">-</button>
+            <button type="button" onclick="appendToExpression('0')">0</button>
+            <button type="button" onclick="appendToExpression('.')">.</button>
+            <button type="button" onclick="deleteLastDigit()">Delete</button>
+            <button type="button" onclick="calculateResult()">=</button>
+            <button type="button" onclick="appendToExpression('+')">+</button>
+        </form>
+    </div>
+
+    <script>
+        function appendToExpression(value) {
+            const expressionInput = document.getElementById('expression');
+            expressionInput.value += value;
+        }
+
+        function deleteLastDigit() {
+            const expressionInput = document.getElementById('expression');
+            expressionInput.value = expressionInput.value.slice(0, -1);
+        }
+
+        function calculateResult() {
+            // Assuming the server will handle the calculation based on the expression sent in the form
+            const form = document.querySelector('form');
+            form.submit();
+        }
+    </script>
+</body>
+</p>
+</html>
